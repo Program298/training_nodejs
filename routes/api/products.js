@@ -12,8 +12,8 @@ router.get('/products', authenticateToken, requireAdminOrApproved, async (req, r
           const products = await Product.find({});
 
           if (!products) {
-            res.status(400).json({
-              status: "400",
+            res.status(200).json({
+              status: "200",
               message: "Products not found",
               data: [products]
             });
