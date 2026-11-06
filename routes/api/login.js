@@ -6,13 +6,19 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
+
 router.post('/login', async (req, res) => {
     try {
         const { Username, Password } = req.body;
         const user = await User.findOne({ 
             Username: Username
         });
-   
+   const userdata ={
+    _id: user._id,
+    Username: user.Username,
+    Role: user.Role,
+    Approved: user.Approved
+};
     if (!user) {
         return res.status(404).json({
             status: "404",
@@ -30,7 +36,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({
             status: "200",
             message: "User Login success but not approved",
-            data: user,
+            data: [userdata],
             token: token
         });
     }  else {
@@ -38,7 +44,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({
             status: "200",
             message: "User Login success",
-            data: user,
+            data: [userdata],
             token: token
         });
 

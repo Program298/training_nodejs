@@ -15,13 +15,13 @@ router.get('/products', authenticateToken, requireAdminOrApproved, async (req, r
             res.status(400).json({
               status: "400",
               message: "Products not found",
-              data: products
+              data: [products]
             });
           }
         res.status(200).json({
             status: "200",
             message: "success",
-            data: products
+            data: [products]
         });}
       
      catch (error) {
@@ -49,13 +49,13 @@ router.get('/products/:id', authenticateToken, requireAdminOrApproved, async (re
             return res.status(404).json({
                 status: "404",
                 message: "There is no product associated with this ID",
-                data: product
+                data: [product]
             })
         }
         res.status(200).json({
             status: "200",
             message: "success",
-            data: product
+            data: [product]
         });
     } catch (error) {
         console.error(error);
@@ -80,7 +80,7 @@ router.post('/products', authenticateToken, requireAdminOrApproved, async (req, 
         res.status(201).json({
             status: "201",
             message: "Product created successfully",
-            data: procuct
+            data: [procuct]
         });
     }
     catch (error) {
@@ -112,7 +112,7 @@ router.put('/products/:id', authenticateToken, requireAdminOrApproved, async (re
         res.status(201).json({
             status: "201",
             message: "Product updated successfully",
-            data: product
+            data: [product]
         });
 
     } catch (error) {
@@ -146,7 +146,7 @@ router.delete('/products/:id', authenticateToken, requireAdminOrApproved, async 
         res.status(200).json({
             status: "200",
             message: "Product deleted successfully",
-            data: product
+            data: [product]
         });
     } catch (error) {
         console.error(error);
@@ -183,7 +183,7 @@ router.get('/products/:id/orders', authenticateToken, requireAdminOrApproved, as
         return res.status(200).json({
             status: "200",
             message: "success",
-            data: product.Order 
+            data: [product.Order] 
         });
     } catch (error) {
         console.error(error);

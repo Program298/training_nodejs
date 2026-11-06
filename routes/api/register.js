@@ -25,12 +25,17 @@ router.post('/register', async (req, res) => {
             Approved : Approved
             
         });
-        
+          const userdata ={
+             _id: user._id,
+            Username: user.Username,
+            Role: user.Role,
+    Approved: user.Approved
+};
         await user.save();
         res.status(201).json({
             status: "201",
             message: "success",
-            data: user
+            data: [userdata]
         });   
     } catch (error) {
         res.status(400).json({ 

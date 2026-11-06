@@ -33,7 +33,7 @@ router.get('/orders', authenticateToken, requireAdminOrApproved, async (req, res
         res.status(200).json({
             status: "200",
             message: "success",
-            data: orders
+            data: [orders]
         });
     } catch (error) {
         console.error(error);

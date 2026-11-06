@@ -9,6 +9,7 @@ const {
 
 const router = express.Router();
 
+
 router.put('/users/:id/approve', authenticateToken, requireAdmin, async (req, res) => {
     try {
         const userId = req.params.id;
@@ -20,6 +21,12 @@ router.put('/users/:id/approve', authenticateToken, requireAdmin, async (req, re
         }
 
         const user = await User.findByIdAndUpdate(userId, { Approved: true }, { new: true });
+           const userdata ={
+                _id: user._id,
+                Username: user.Username,
+                Role: user.Role,
+                Approved: user.Approved
+                };
         if (!user) {
             return res.status(400).json({
                 status: "400",
@@ -29,7 +36,7 @@ router.put('/users/:id/approve', authenticateToken, requireAdmin, async (req, re
         res.status(201).json({
             status: "201",
             message: "User approved successfully",
-            data: user
+            data: [userdata]
         });
     } catch (error) {
         console.error(error);
