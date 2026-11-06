@@ -39,13 +39,15 @@ async function requireAdminOrApproved(req, res, next) {
 
 async function requireAdmin(req, res, next) {
     try {
-        const user = await User.findById(req.userId);
+        const user = await User.findById(req.user.userId);
         if (!user || user.Role !== 'Admin') {
             return res.status(401).json({
                 status: "401",
                 message: "You are not Admin"
             });
+            
         }
+        console.log(user.Role)
         return next();
     } catch (error) {
         res.status(500).json({
