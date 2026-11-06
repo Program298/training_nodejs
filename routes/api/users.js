@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const User = require('../../models/users.model');
 const {
     authenticateToken,
-    requireAdminOrApproved
+    requireAdminOrApproved,
+    requireAdmin
 } = require('../../midleware/auth');
 
 const router = express.Router();
 
-router.put('/users/:id/approve', authenticateToken, requireAdminOrApproved, async (req, res) => {
+router.put('/users/:id/approve', authenticateToken, requireAdmin, async (req, res) => {
     try {
         const userId = req.params.id;
         if (!mongoose.Types.ObjectId.isValid(userId)) {
