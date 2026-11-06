@@ -21,18 +21,18 @@ router.put('/users/:id/approve', authenticateToken, requireAdmin, async (req, re
         }
 
         const user = await User.findByIdAndUpdate(userId, { Approved: true }, { new: true });
-           const userdata ={
-                _id: user._id,
-                Username: user.Username,
-                Role: user.Role,
-                Approved: user.Approved
-                };
+       
         if (!user) {
             return res.status(400).json({
                 status: "400",
                 message: "User not found"
             });
-        }
+        }    const userdata ={
+                _id: user._id,
+                Username: user.Username,
+                Role: user.Role,
+                Approved: user.Approved
+                };
         res.status(201).json({
             status: "201",
             message: "User approved successfully",
