@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
              _id: user._id,
             Username: user.Username,
             Role: user.Role,
-    Approved: user.Approved
+            Approved: user.Approved
 };
         await user.save();
         res.status(201).json({
